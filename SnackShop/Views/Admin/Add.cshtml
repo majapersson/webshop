@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h2>Add Product</h2>
+
+<h3>@ViewBag.AddMessage</h3>
+
+@using (Html.BeginForm())
+{
+    <div class="input-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" class="form-control" />
+    </div>
+    <div class="input-group">
+        <label for="description">Description:</label>
+        <input type="text" name="description" class="form-control" />
+    </div>
+    <div class="input-group">
+        <label for="price">Price:</label>
+        <input type="text" name="price" class="form-control" />
+    </div>
+    <div class="input-group">
+        <label for="imgUrl">Url to image:</label>
+        <input type="url" name="imgUrl" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Snack</button>
+}

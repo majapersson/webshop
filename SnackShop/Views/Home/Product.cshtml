@@ -1,0 +1,15 @@
+﻿@model SnackShop.Core.Models.ProductModel
+
+@{
+    ViewData["Title"] = "Product";
+}
+
+<h2>@Model.Name</h2>
+
+<img src="@Model.ImageUrl" />
+<p>@Model.Description</p>
+
+<h3>@Model.Price  :-</h3>
+
+<a href="/cart/add" class="btn btn-success">Add to cart</a>
+

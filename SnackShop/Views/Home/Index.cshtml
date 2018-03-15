@@ -1,0 +1,15 @@
+﻿@model List<SnackShop.Core.Models.ProductModel>
+
+@{
+    ViewData["Title"] = "Store Page";
+}
+
+<h2>Welcome to Snackshop!</h2>
+
+@foreach (var product in Model)
+{
+    <div class="card">
+        <img src="@product.ImageUrl" />
+        <h4><a href="/product/@product.Slug">@product.Name</a></h4>
+    </div>
+}

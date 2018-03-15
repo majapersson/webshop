@@ -1,0 +1,12 @@
+.DS_Store
+.vs
+[Bb]in/
+[Dd]ebug/
+[Oo]bj/
+[Rr]elease/
+**/C#/**/packages/*
+build/
+node_modules
+x64/
+**/wwwroot/lib
+**/AppData
