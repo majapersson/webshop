@@ -1,0 +1,73 @@
+﻿using Dapper;
+using System;
+using System.Data.SqlClient;
+using SnackShop.Core.Models;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace SnackShop.Core.Repositories
+{
+    public class CartRepository
+    {
+        private readonly string ConnectionString;
+
+        public CartRepository(string connectionString)
+        {
+            this.ConnectionString = connectionString;
+        }
+
+        public List<CartProductModel> GetCart(string cartId)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                var sql = "SELECT carts.ProductId, count(carts.ProductId) AS Qty, products.Name, products.Price " +
+                    "FROM carts " +
+                    "INNER JOIN  products on carts.productId=products.Id " +
+                    "WHERE cartId = @cartId GROUP BY carts.ProductID, products.Name, products.Price";
+                var result = connection.Query<CartProductModel>(sql, new { cartId }).ToList();
+                return result;
+            }
+        }
+
+        public bool EmptyCart(string cartId)
+        {
+            return true;
+        }
+
+        public bool AddProduct(int productId, string cartId)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(this.ConnectionString))
+                {
+                    var sql = "INSERT INTO carts (cartId, productId) VALUES (@cartId, @productId)";
+                    connection.Execute(sql, new { cartId, productId });
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool RemoveProduct(int productId, string cartId)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(this.ConnectionString))
+                {
+                    var sql = "DELETE FROM carts WHERE cartId = @cartId AND productId = @productId";
+                    connection.Execute(sql, new { cartId, productId });
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
+}

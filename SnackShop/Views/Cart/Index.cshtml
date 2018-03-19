@@ -1,0 +1,14 @@
+﻿@model List<SnackShop.Core.Models.CartProductModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Your cart</h2>
+
+<ul>
+    @foreach (var product in @Model)
+    {
+    <li>@product.Name, @product.Qty, @product.Price kr</li>
+    }
+</ul>
