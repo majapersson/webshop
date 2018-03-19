@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SnackShop.Core.Repositories;
@@ -10,7 +11,8 @@ namespace SnackShop.Controllers
 {
     public class HomeController : Controller
     {
-        public ProductService ProductService;
+        private ProductService ProductService;
+        private string CartId;
 
         public HomeController(IConfiguration configuration)
         {
@@ -19,16 +21,30 @@ namespace SnackShop.Controllers
                     configuration.GetConnectionString("ConnectionString")));
         }
 
+        public string GetCartCookie()
+        {
+            var cartId = Request.Cookies["CartID"];
+            if (cartId == null)
+            {
+                Guid guid = Guid.NewGuid();
+                Response.Cookies.Append("CartID", guid.ToString());
+                return guid.ToString();
+            }
+
+            return cartId;
+        }
+
         public IActionResult Index()
         {
+            //this.CartId = this.GetCartCookie();
             var products = this.ProductService.GetAll();
             return View(products);
         }
 
-        [Route("product/{id?}")]
-        public IActionResult Product(string id)
+        [Route("product/{slug?}")]
+        public IActionResult Product(string slug)
         {
-            var product = this.ProductService.Get(id);
+            var product = this.ProductService.Get(slug);
 
             return View(product);
         }

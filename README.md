@@ -21,6 +21,11 @@ Here be testers...
 
 ## Changelog
 
+### 2018-03-19
+- Started on basic cart page
+- User can now add and remove items from cart
+- Basic product page added
+
 ### 2018-03-15
 - Started on store front page and product page
 - Fixed admin tools for adding and editing products
