@@ -36,7 +36,7 @@ namespace SnackShop.Controllers
 
         public IActionResult Index()
         {
-            //this.CartId = this.GetCartCookie();
+            this.CartId = this.GetCartCookie();
             var products = this.ProductService.GetAll();
             return View(products);
         }

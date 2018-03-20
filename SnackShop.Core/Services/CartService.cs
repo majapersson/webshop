@@ -17,9 +17,9 @@ namespace SnackShop.Core.Services
             this.CartRepository = cartRepository;
         }
 
-        public List<CartProductModel> GetCart(string cartId)
+        public CartModel GetCart(string cartId)
         {
-            return this.CartRepository.GetCart(cartId);
+            return new CartModel(cartId, this.CartRepository.GetCart(cartId));
         }
 
         public bool EmptyCart()
