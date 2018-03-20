@@ -1,0 +1,65 @@
+﻿@model SnackShop.Core.Models.Cart
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Checkout</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Product Name</th>
+            <th>Qty</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in @Model.Items)
+        {
+            <tr>
+                <td><a href="/cart/remove/@product.Id">Remove</a></td>
+                <td>@product.Name</td>
+                <td>@product.Qty</td>
+                <td>@product.Price kr</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2"></td>
+            <td>Total</td>
+            <td><strong>@Model.GetTotals() kr<strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Customer information</h3>
+
+@using (Html.BeginForm())
+{
+  <div class="input-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" />
+  </div>
+  <div class="input-group">
+    <label for="street">Street</label>
+    <input type="text" class="form-control" name="street" />
+  </div>
+  <div class="input-group">
+    <label for="zipcode">Zipcode</label>
+    <input type="text" class="form-control" name="zipcode" />
+  </div>
+  <div class="input-group">
+    <label for="city">City</label>
+    <input type="text" class="form-control" name="city" />
+  </div>
+  <div class="input-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" name="email" />
+  </div>
+  <div class="input-group">
+    <label for="phone">Phone number</label>
+    <input type="tel" class="form-control" name="phone" />
+  </div>
+
+  <button type="submit" class="btn btn-success">Place Order</button>
+}
