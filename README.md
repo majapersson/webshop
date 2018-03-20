@@ -21,6 +21,9 @@ Here be testers...
 
 ## Changelog
 
+### 2018-03-20
+- Started on checkout page and functionality
+
 ### 2018-03-19
 - Started on basic cart page
 - User can now add and remove items from cart
