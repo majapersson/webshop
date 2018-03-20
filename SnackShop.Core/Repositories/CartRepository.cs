@@ -20,7 +20,7 @@ namespace SnackShop.Core.Repositories
         {
             using (var connection = new SqlConnection(this.ConnectionString))
             {
-                var sql = "SELECT carts.ProductId, count(carts.ProductId) AS Qty, products.Name, products.Price " +
+                var sql = "SELECT carts.ProductId AS Id, count(carts.ProductId) AS Qty, products.Name, products.Price " +
                     "FROM carts " +
                     "INNER JOIN  products on carts.productId=products.Id " +
                     "WHERE cartId = @cartId GROUP BY carts.ProductID, products.Name, products.Price";
@@ -58,7 +58,7 @@ namespace SnackShop.Core.Repositories
             {
                 using (var connection = new SqlConnection(this.ConnectionString))
                 {
-                    var sql = "DELETE FROM carts WHERE cartId = @cartId AND productId = @productId";
+                    var sql = "DELETE TOP (1) FROM carts WHERE cartId = @cartId AND productId = @productId";
                     connection.Execute(sql, new { cartId, productId });
                 }
             }

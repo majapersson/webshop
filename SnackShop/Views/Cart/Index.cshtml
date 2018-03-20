@@ -1,4 +1,4 @@
-﻿@model List<SnackShop.Core.Models.CartProductModel>
+﻿@model SnackShop.Core.Models.CartModel
 
 @{
     ViewData["Title"] = "Index";
@@ -6,9 +6,31 @@
 
 <h2>Your cart</h2>
 
-<ul>
-    @foreach (var product in @Model)
+<table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Product Name</th>
+        <th>Qty</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in @Model.Items)
     {
-    <li>@product.Name, @product.Qty, @product.Price kr</li>
+      <tr>
+        <td><a href="/cart/remove/@product.Id">Remove</a></td>
+        <td>@product.Name</td>
+        <td>@product.Qty</td>
+        <td>@product.Price kr</td>
+      </tr>
     }
-</ul>
+    <tr>
+      <td colspan="2"></td>
+      <td>Total</td>
+      <td>@Model.GetTotals() kr</td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/checkout/" class="btn btn-success">Proceed to checkout</a>
