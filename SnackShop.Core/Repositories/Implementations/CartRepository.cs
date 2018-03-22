@@ -31,6 +31,19 @@ namespace SnackShop.Core.Repositories
 
         public bool EmptyCart(string cartId)
         {
+            try
+            {
+                using (var connection = new SqlConnection(this.ConnectionString))
+                {
+                    var sql = "DELETE FROM carts WHERE cartId = @cartId";
+                    connection.Execute(sql, new { cartId });
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -68,6 +81,11 @@ namespace SnackShop.Core.Repositories
             }
 
             return true;
+        }
+
+        public void RemoveOldCarts()
+        {
+
         }
     }
 }

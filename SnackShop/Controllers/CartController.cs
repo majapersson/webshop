@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SnackShop.Core.Models;
@@ -32,17 +33,9 @@ namespace SnackShop.Controllers
         [Route("cart/add/{productId?}")]
         public IActionResult Add(int productId)
         {
-            var cartId = Request.Cookies["CartID"];
+
+            var cartId = this.GetCartCookie();
             var result = this.CartService.AddToCart(productId, cartId);
-            
-            if (result)
-            {
-                ViewBag.AddToCartMessage = "The product was added to your cart.";
-            }
-            else
-            {
-                ViewBag.AddToCartMessage = "An error occurred, your product was not added to your cart.";
-            }
 
             return RedirectToAction("Index");
         }
@@ -50,19 +43,22 @@ namespace SnackShop.Controllers
         [Route("cart/remove/{productId?}")]
         public IActionResult Remove(int productId)
         {
-            var cartId = Request.Cookies["CartID"];
-            var result = this.CartService.RemoveFromCart(productId, cartId);
-
-            if (result)
-            {
-                ViewBag.RemoveFromCartMessage = "The product was removed to your cart.";
-            }
-            else
-            {
-                ViewBag.RemoveFromCartMessage = "An error occurred, your product has not been removed from your cart.";
-            }
+            var result = this.CartService.RemoveFromCart(productId, this.Cart.Id);
 
             return RedirectToAction("Index");
+        }
+
+        public string GetCartCookie()
+        {
+            var cartId = Request.Cookies["CartID"];
+            if (cartId == null)
+            {
+                Guid guid = Guid.NewGuid();
+                Response.Cookies.Append("CartID", guid.ToString(), new CookieOptions { Expires = DateTime.Now.AddDays(14) });
+                return guid.ToString();
+            }
+
+            return cartId;
         }
     }
 }

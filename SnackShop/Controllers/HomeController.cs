@@ -12,7 +12,6 @@ namespace SnackShop.Controllers
     public class HomeController : Controller
     {
         private ProductService ProductService;
-        private string CartId;
 
         public HomeController(IConfiguration configuration)
         {
@@ -21,22 +20,8 @@ namespace SnackShop.Controllers
                     configuration.GetConnectionString("ConnectionString")));
         }
 
-        public string GetCartCookie()
-        {
-            var cartId = Request.Cookies["CartID"];
-            if (cartId == null)
-            {
-                Guid guid = Guid.NewGuid();
-                Response.Cookies.Append("CartID", guid.ToString());
-                return guid.ToString();
-            }
-
-            return cartId;
-        }
-
         public IActionResult Index()
         {
-            this.CartId = this.GetCartCookie();
             var products = this.ProductService.GetAll();
             return View(products);
         }

@@ -6,9 +6,9 @@ namespace SnackShop.Core.Models
 {
     public class CartProductModel
     {
-        public int Id;
-        public string Name;
-        public int Qty;
-        public decimal Price;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Qty { get; set; }
+        public decimal Price { get; set; }
     }
 }

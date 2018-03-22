@@ -8,29 +8,33 @@
 
 <table class="table">
     <thead>
-      <tr>
-        <th></th>
-        <th>Product Name</th>
-        <th>Qty</th>
-        <th>Price</th>
-      </tr>
+        <tr>
+            <th></th>
+            <th>Product Name</th>
+            <th>Qty</th>
+            <th>Price</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var product in @Model.Items)
-    {
-      <tr>
-        <td><a href="/cart/remove/@product.Id">Remove</a></td>
-        <td>@product.Name</td>
-        <td>@product.Qty</td>
-        <td>@product.Price kr</td>
-      </tr>
-    }
-    <tr>
-      <td colspan="2"></td>
-      <td>Total</td>
-      <td>@Model.GetTotals() kr</td>
-    </tr>
+        @foreach (var product in @Model.Items)
+        {
+            <tr>
+                <td><a href="/cart/remove/@product.Id">Remove</a></td>
+                <td>@product.Name</td>
+                <td>@product.Qty</td>
+                <td>@product.Price kr</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2"></td>
+            <td>Total</td>
+            <td>@Model.GetTotals() kr</td>
+        </tr>
     </tbody>
 </table>
 
-<a href="/checkout/" class="btn btn-success">Proceed to checkout</a>
+@using (Html.BeginForm("", "checkout"))
+{
+    <input type="hidden" name="CartId" value="@Model.Id" />
+    <button type="submit" class="btn btn-success">Proceed to checkout</button>
+}

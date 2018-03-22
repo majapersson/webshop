@@ -6,12 +6,12 @@ namespace SnackShop.Core.Models
 {
     public class CartModel
     {
-        public string CartId { get; }
-        public List<CartProductModel> Items { get; }
+        public string Id { get; set; }
+        public List<CartProductModel> Items { get; set; }
 
         public CartModel(string cartId, List<CartProductModel> items)
         {
-            this.CartId = cartId;
+            this.Id = cartId;
             this.Items = items;
         }
 

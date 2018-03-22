@@ -22,9 +22,9 @@ namespace SnackShop.Core.Services
             return new CartModel(cartId, this.CartRepository.GetCart(cartId));
         }
 
-        public bool EmptyCart()
+        public bool EmptyCart(string cartId)
         {
-            return true;
+            return this.CartRepository.EmptyCart(cartId);
         }
 
         public bool AddToCart(int productId, string cartId)
