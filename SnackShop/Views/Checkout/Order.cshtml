@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h2>Thank you for your order!</h2>
+
+<h3>Order nr. @ViewBag.Order.Id</h3>
+@foreach (var product in @ViewBag.Cart.Items)
+{
+    <p>@product.Name x @product.Qty</p>
+}
+
+<p><strong>Total: @ViewBag.Cart.GetTotals() kr</strong></p>
+
+<div class="card">
+    @ViewBag.Order.Name
+    @ViewBag.Order.Street
+    @ViewBag.Order.ZipCode
+    @ViewBag.Order.City
+    @ViewBag.Order.Email
+    @ViewBag.Order.Phone
+</div>
+

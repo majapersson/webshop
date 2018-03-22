@@ -6,11 +6,14 @@ namespace SnackShop.Core.Models
 {
     public class OrderModel
     {
-        public string Id;
-        public CartModel Cart;
-        public string Name;
-        public string Address;
-        public string Email;
-        public string Phone;
+        public string Id { get; set; }
+        public string CartId { get; set; }
+        public string Name { get; set; }
+        public string Street { get; set; }
+        public string ZipCode { get; set; }
+        public string City { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public bool IsOpen { get; set; }
     }
 }

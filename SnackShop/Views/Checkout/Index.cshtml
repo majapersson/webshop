@@ -1,4 +1,4 @@
-﻿@model SnackShop.Core.Models.Cart
+﻿@model SnackShop.Core.Models.CartModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -8,7 +8,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th></th>
             <th>Product Name</th>
             <th>Qty</th>
             <th>Price</th>
@@ -18,24 +17,24 @@
         @foreach (var product in @Model.Items)
         {
             <tr>
-                <td><a href="/cart/remove/@product.Id">Remove</a></td>
                 <td>@product.Name</td>
                 <td>@product.Qty</td>
                 <td>@product.Price kr</td>
             </tr>
         }
         <tr>
-            <td colspan="2"></td>
+            <td></td>
             <td>Total</td>
-            <td><strong>@Model.GetTotals() kr<strong></td>
+            <td><strong>@Model.GetTotals() kr</strong></td>
         </tr>
     </tbody>
 </table>
 
 <h3>Customer information</h3>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("order", "checkout", FormMethod.Post))
 {
+  <input type="hidden" name="cartId" value="@Model.Id" />
   <div class="input-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" name="name" />
