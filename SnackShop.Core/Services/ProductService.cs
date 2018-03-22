@@ -10,9 +10,9 @@ namespace SnackShop.Core.Services
     public class ProductService
     {
         private readonly SlugHelper SlugHelper;
-        private readonly ProductRepository ProductRepository;
+        private readonly IProductRepository ProductRepository;
 
-        public ProductService(ProductRepository productRepository)
+        public ProductService(IProductRepository productRepository)
         {
             this.ProductRepository = productRepository;
             this.SlugHelper = new SlugHelper();

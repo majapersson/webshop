@@ -7,7 +7,7 @@ using SnackShop.Core.Models;
 
 namespace SnackShop.Core.Repositories
 {
-    public class ProductRepository
+    public class ProductRepository: IProductRepository
     {
         private readonly string ConnectionString;
 
