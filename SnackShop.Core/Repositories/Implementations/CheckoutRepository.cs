@@ -3,7 +3,6 @@ using SnackShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace SnackShop.Core.Repositories.Implementations
 {

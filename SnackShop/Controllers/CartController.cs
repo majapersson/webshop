@@ -48,6 +48,17 @@ namespace SnackShop.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult Empty(string cartId)
+        {
+            var cookie = Request.Cookies["CartID"];
+            if (cookie == cartId)
+            { 
+                this.CartService.EmptyCart(cookie);
+            }
+            return RedirectToAction("Index");
+        }
+
         public string GetCartCookie()
         {
             var cartId = Request.Cookies["CartID"];

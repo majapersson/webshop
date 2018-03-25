@@ -52,7 +52,7 @@ namespace SnackShop.Controllers
         public string GetRandomOrderNumber()
         {
             string numberString = "";
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < 8; i++)
             {
                 numberString += new Random().Next(0, 9);
             }

@@ -1,8 +1,5 @@
 ﻿using SnackShop.Core.Models;
 using SnackShop.Core.Repositories.Implementations;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SnackShop.Core.Services
 {

@@ -16,6 +16,11 @@ namespace SnackShop.Core.Repositories
             this.ConnectionString = connectionString;
         }
 
+        public string GetConnectionString()
+        {
+            return this.ConnectionString;
+        }
+
         public List<CartProductModel> GetCart(string cartId)
         {
             using (var connection = new SqlConnection(this.ConnectionString))
@@ -85,6 +90,11 @@ namespace SnackShop.Core.Repositories
 
         public void RemoveOldCarts()
         {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                var sql = "DELETE FROM carts WHERE DATEDIFF(day, Date, GETDATE()) > 14 AND NOT EXISTS (SELECT * FROM orders WHERE orders.cartId = carts.cartid)";
+                connection.Execute(sql);
+            }
 
         }
     }

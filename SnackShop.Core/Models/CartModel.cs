@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SnackShop.Core.Models
@@ -13,6 +14,11 @@ namespace SnackShop.Core.Models
         {
             this.Id = cartId;
             this.Items = items;
+        }
+
+        public bool IsEmpty()
+        {
+            return (string.IsNullOrEmpty(this.Id) && !Items.Any());
         }
 
         public decimal GetTotals()
