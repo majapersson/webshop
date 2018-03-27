@@ -1,4 +1,5 @@
 # SnackShop
+<img src="https://media.giphy.com/media/NMg86diE6qPni/giphy.gif" width="100%">
 This is a repo for my C# assignment to build a webshop. My webshop will be called SnackShop and will sell different kinds of tasty snacks.
 
 ## How to use
