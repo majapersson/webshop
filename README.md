@@ -8,15 +8,15 @@ This is a repo for my C# assignment to build a webshop. My webshop will be calle
 - Build and start the solution in Visual Studio and it will start a browser tab for the project
 
 ## Features
-[x] Front store page that lists products from database
-[x] Product page with additional info about specific product
-[x] Personal cart based on cookies/session
-[x] Ability to add and delete products from cart
-[x] List information about products and total amount on checkout
-[x] Add customer information on checkout
-[x] Confirm order to customer
-[x] Admin tools for adding and editing products
-[ ] Unit test
+- [x] Front store page that lists products from database
+- [x] Product page with additional info about specific product
+- [x] Personal cart based on cookies/session
+- [x] Ability to add and delete products from cart
+- [x] List information about products and total amount on checkout
+- [x] Add customer information on checkout
+- [x] Confirm order to customer
+- [x] Admin tools for adding and editing products
+- [ ] Unit test
 
 ## Testers
 Here be testers...
