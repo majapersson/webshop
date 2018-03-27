@@ -5,20 +5,25 @@
 
 <h2>Thank you for your order!</h2>
 
+<div class="card">
+<div class="card-body">
 <h3>Order nr. @ViewBag.Order.Id</h3>
 @foreach (var product in @ViewBag.Cart.Items)
 {
-    <p>@product.Name x @product.Qty</p>
+    <p>@product.Name &emsp; @product.Qty x @product.Price kr</p>
 }
 
 <p><strong>Total: @ViewBag.Cart.GetTotals() kr</strong></p>
 
-<div class="card">
-    @ViewBag.Order.Name
-    @ViewBag.Order.Street
-    @ViewBag.Order.ZipCode
-    @ViewBag.Order.City
-    @ViewBag.Order.Email
-    @ViewBag.Order.Phone
+<div class="address">
+    <p>@ViewBag.Order.Name</p>
+    <p>@ViewBag.Order.Street</p>
+    <p>@ViewBag.Order.ZipCode</p>
+    <p>@ViewBag.Order.City</p>
+    <p>@ViewBag.Order.Email</p>
+    <p>@ViewBag.Order.Phone</p>
 </div>
 
+<a href="/" class="btn btn-success">Return to store</a>
+</div>
+</div>

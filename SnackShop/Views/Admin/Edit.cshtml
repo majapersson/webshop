@@ -1,33 +1,35 @@
 ﻿@model SnackShop.Core.Models.ProductModel
 @{
-    ViewData["Title"] = "Get";
+    ViewData["Title"] = "Edit Product";
 }
 
 <h2>Edit @Model.Name</h2>
 
 <h3>@ViewBag.EditMessage</h3>
 
+<div class="card">
+<div class="card-body">
 @using (Html.BeginForm())
 {
     <input type="hidden" name="id" value="@Model.Id" />
-    <div class="input-group">
+    <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" name="name" class="form-control" value="@Model.Name" />
     </div>
-    <div class="input-group">
+    <div class="form-group">
         <label for="description">Description:</label>
         <input type="text" name="description" class="form-control" value="@Model.Description" />
     </div>
-    <div class="input-group">
+    <div class="form-group">
         <label for="price">Price:</label>
         <input type="text" name="price" class="form-control" value="@Model.Price" />
     </div>
-    <div class="input-group">
+    <div class="form-group">
         <label for="imgUrl">Url to image:</label>
         <input type="url" name="imageUrl" class="form-control" value="@Model.ImageUrl"/>
     </div>
 
-    <button type="submit" class="btn btn-primary">Edit Snack</button>
+    <button type="submit" class="btn btn-success">Edit Snack</button>
 }
-
-
+</div>
+</div>

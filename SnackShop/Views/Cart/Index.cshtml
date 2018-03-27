@@ -1,40 +1,60 @@
 ﻿@model SnackShop.Core.Models.CartModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Cart";
 }
 
 <h2>Your cart</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Product Name</th>
-            <th>Qty</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in @Model.Items)
-        {
-            <tr>
-                <td><a href="/cart/remove/@product.Id">Remove</a></td>
-                <td>@product.Name</td>
-                <td>@product.Qty</td>
-                <td>@product.Price kr</td>
-            </tr>
-        }
-        <tr>
-            <td colspan="2"></td>
-            <td>Total</td>
-            <td>@Model.GetTotals() kr</td>
-        </tr>
-    </tbody>
-</table>
-
-@using (Html.BeginForm("", "checkout"))
+<div class="card">
+<div class="card-body">
+@if (!@Model.Items.Any())
 {
-    <input type="hidden" name="CartId" value="@Model.Id" />
-    <button type="submit" class="btn btn-success">Proceed to checkout</button>
+    <h3>Your cart is empty!</h3>
+    <a href="/" class="btn btn-success">Back to shop</a>
 }
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Product Name</th>
+                <th>Qty</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in @Model.Items)
+            {
+                <tr>
+                    <td><a href="/cart/remove/@product.Id">Remove</a></td>
+                    <td>@product.Name</td>
+                    <td>@product.Qty</td>
+                    <td>@product.Price kr</td>
+                </tr>
+            }
+            <tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td>@Model.GetTotals() kr</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="button-container">
+    @using (Html.BeginForm("empty", "cart"))
+    {
+        <input type="hidden" name="cartId" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger">Empty cart</button>
+    }
+
+    @using (Html.BeginForm("", "checkout"))
+    {
+        <input type="hidden" name="cartId" value="@Model.Id" />
+        <button type="submit" class="btn btn-success">Proceed to checkout</button>
+    }
+    </div>
+}
+</div>
+</div>

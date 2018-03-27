@@ -1,10 +1,12 @@
 ﻿@model SnackShop.Core.Models.CartModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Checkout";
 }
 
 <h2>Checkout</h2>
 
+<div class="card">
+<div class="card-body">
 <table class="table">
     <thead>
         <tr>
@@ -35,30 +37,33 @@
 @using (Html.BeginForm("order", "checkout", FormMethod.Post))
 {
   <input type="hidden" name="cartId" value="@Model.Id" />
-  <div class="input-group">
+  <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" name="name" />
+      <input type="text" class="form-control w-25" name="name" />
   </div>
-  <div class="input-group">
+  <div class="form-group">
     <label for="street">Street</label>
-    <input type="text" class="form-control" name="street" />
+    <input type="text" class="form-control w-25" name="street" />
   </div>
-  <div class="input-group">
+  <div class="form-group">
     <label for="zipcode">Zipcode</label>
-    <input type="text" class="form-control" name="zipcode" />
+    <input type="text" class="form-control w-25" name="zipcode" />
   </div>
-  <div class="input-group">
+  <div class="form-group">
     <label for="city">City</label>
-    <input type="text" class="form-control" name="city" />
+    <input type="text" class="form-control w-25" name="city" />
   </div>
-  <div class="input-group">
+  <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" name="email" />
+    <input type="email" class="form-control w-25" name="email" />
   </div>
-  <div class="input-group">
+  <div class="form-group">
     <label for="phone">Phone number</label>
-    <input type="tel" class="form-control" name="phone" />
+    <input type="tel" class="form-control w-25" name="phone" />
   </div>
-
+  <a href="/cart" class="btn btn-danger">Back to cart</a>
   <button type="submit" class="btn btn-success">Place Order</button>
 }
+
+</div>
+</div>

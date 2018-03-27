@@ -8,11 +8,12 @@ This is a repo for my C# assignment to build a webshop. My webshop will be calle
 
 ## Features
 [x] Front store page that lists products from database
-[ ] Product page with additional info about specific product
-[ ] Personal cart based on cookies/session
-[ ] Ability to add and delete products from cart
-[ ] List information about products and total amount on checkout
-[ ] Add customer information on checkout
+[x] Product page with additional info about specific product
+[x] Personal cart based on cookies/session
+[x] Ability to add and delete products from cart
+[x] List information about products and total amount on checkout
+[x] Add customer information on checkout
+[x] Confirm order to customer
 [x] Admin tools for adding and editing products
 [ ] Unit test
 
@@ -20,6 +21,9 @@ This is a repo for my C# assignment to build a webshop. My webshop will be calle
 Here be testers...
 
 ## Changelog
+
+### 2018-03-22
+- Basic checkout functionality added
 
 ### 2018-03-20
 - Started on checkout page and functionality

@@ -51,7 +51,7 @@ namespace SnackShop.Controllers
 
             var viewProduct = this.ProductService.Get(product.Slug);
 
-            return View(viewProduct);
+            return RedirectToAction("Index");
         }
     }
 }

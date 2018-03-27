@@ -4,14 +4,22 @@
     ViewData["Title"] = "Store Page";
 }
 
-<h2>Welcome to Snackshop!</h2>
+<h2 class="main-heading">Welcome to <span>Snackshop!</span></h2>
+<h3 class="main-heading">For all your snacky needs!</h3>
 
+<div class="card">
+<div class="card-body">
 <div class="product-wrapper">
     @foreach (var product in Model)
     {
-        <div class="card">
+        <div class="product">
             <img src="@product.ImageUrl" />
-            <h4><a href="/product/@product.Slug">@product.Name</a></h4>
+            <div class="row">
+              <h4><a href="/product/@product.Slug">@product.Name</a></h4>
+              <a href="cart/add/@product.Id" class="btn btn-success">Add to cart</a>
+            </div>
         </div>
     }
+    </div>
+    </div>
 </div>
