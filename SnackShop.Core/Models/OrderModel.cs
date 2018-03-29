@@ -14,6 +14,7 @@ namespace SnackShop.Core.Models
         public string City { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public DateTime Date { get; set; }
         public bool IsOpen { get; set; }
     }
 }
