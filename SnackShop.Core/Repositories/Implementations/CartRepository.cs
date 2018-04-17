@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace SnackShop.Core.Repositories
 {
-    public class CartRepository
+    public class CartRepository : ICartRepository
     {
         private readonly string ConnectionString;
 
@@ -16,16 +16,11 @@ namespace SnackShop.Core.Repositories
             this.ConnectionString = connectionString;
         }
 
-        public string GetConnectionString()
-        {
-            return this.ConnectionString;
-        }
-
         public List<CartProductModel> GetCart(string cartId)
         {
             using (var connection = new SqlConnection(this.ConnectionString))
             {
-                var sql = "SELECT carts.ProductId AS Id, count(carts.ProductId) AS Qty, products.Name, products.Price " +
+                var sql = "SELECT carts.ProductId, count(carts.ProductId) AS Qty, products.Name, products.Price " +
                     "FROM carts " +
                     "INNER JOIN  products on carts.productId=products.Id " +
                     "WHERE cartId = @cartId GROUP BY carts.ProductID, products.Name, products.Price";

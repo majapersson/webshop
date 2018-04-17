@@ -6,34 +6,47 @@ namespace SnackShop.Core.Services
 {
     public class CartService
     {
-        private readonly CartRepository CartRepository;
-        private readonly ProductRepository ProductRepository;
+        private readonly ICartRepository CartRepository;
+        private readonly IProductRepository ProductRepository;
 
-        public CartService(CartRepository cartRepository)
+        public CartService(ICartRepository cartRepository, IProductRepository productRepository)
         {
             this.CartRepository = cartRepository;
-            this.ProductRepository = new ProductRepository(this.CartRepository.GetConnectionString());
+            this.ProductRepository = productRepository;
         }
 
         public CartModel GetCart(string cartId)
         {
+            if(string.IsNullOrWhiteSpace(cartId))
+            {
+                return null;
+            }
+
             return new CartModel(cartId, this.CartRepository.GetCart(cartId));
         }
 
         public bool EmptyCart(string cartId)
         {
+            if (string.IsNullOrWhiteSpace(cartId))
+            {
+                return false;
+            }
+
             return this.CartRepository.EmptyCart(cartId);
         }
 
         public bool AddToCart(int productId, string cartId)
         {
-            // Removes any old carts still in database where cookie has expired
             this.CartRepository.RemoveOldCarts();
 
-            // Checks if product exists before adding to cart
-            var product = this.ProductRepository.GetAll().SingleOrDefault(x => x.Id == productId);
+            if (productId <= 0 || string.IsNullOrWhiteSpace(cartId))
+            {
+                return false;
+            }
             
-            if (product == null)
+            var productExists = this.ProductRepository.GetAll().Any(x => x.Id == productId);
+            
+            if (!productExists)
             {
                 return false;
             }
@@ -43,10 +56,14 @@ namespace SnackShop.Core.Services
 
         public bool RemoveFromCart(int productId, string cartId)
         {
-            // Checks if product exists in cart before removing
-            var cartProduct = this.CartRepository.GetCart(cartId).SingleOrDefault(x => x.Id == productId);
+            if (productId <= 0 || string.IsNullOrWhiteSpace(cartId))
+            {
+                return false;
+            }
 
-            if (cartProduct == null)
+            var productExistsInCart = this.CartRepository.GetCart(cartId).Any(x => x.ProductId == productId);
+
+            if (!productExistsInCart)
             {
                 return false;
             }
