@@ -7,7 +7,7 @@ using SnackShop.Core.Models;
 
 namespace SnackShop.Core.Repositories
 {
-    public class ProductRepository: IProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly string ConnectionString;
 
@@ -66,6 +66,24 @@ namespace SnackShop.Core.Repositories
                     connection.Execute(sql, 
                         new { name = product.Name, desc = product.Description, slug = product.Slug,
                             price = product.Price, imageUrl = product.ImageUrl, id = product.Id });
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool Delete(int productId)
+        {
+            try
+            { 
+                using (var connection = new SqlConnection(this.ConnectionString))
+                {
+                    var sql = "DELETE FROM products WHERE Id = @productId";
+                    connection.Execute(sql, new { productId });
                 }
             }
             catch (Exception)

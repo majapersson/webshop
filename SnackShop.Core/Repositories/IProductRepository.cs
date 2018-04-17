@@ -14,5 +14,6 @@ namespace SnackShop.Core.Repositories
 
         bool Edit(ProductModel product);
 
+        bool Delete(int productId);
     }
 }
