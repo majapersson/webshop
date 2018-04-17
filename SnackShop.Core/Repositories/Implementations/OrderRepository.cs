@@ -21,23 +21,79 @@ namespace SnackShop.Core.Repositories.Implementations
             return this.ConnectionString;
         }
 
-        public bool PlaceOrder(OrderModel order)
+        public List<OrderModel> GetAllOrders()
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                var sql = "SELECT * FROM orders";
+                return connection.Query<OrderModel>(sql).ToList();
+            }
+        }
+
+        public OrderModel GetOrder(string orderId)
+        {
+            OrderModel order;
+            try
+            {
+                using (var connection = new SqlConnection(this.ConnectionString))
+                {
+                    var sql = "SELECT * FROM Orders WHERE OrderId = @orderId";
+                    order = connection.QuerySingleOrDefault<OrderModel>(sql, new { orderId });
+
+                    sql = "SELECT * FROM OrderContent WHERE OrderId = @orderId";
+                    order.Items = connection.Query<CartProductModel>(sql, new { orderId }).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return order;
+        }
+
+        public bool InsertOrderInfo(OrderModel order)
         {
             try
             {
                 using (var connection = new SqlConnection(this.ConnectionString))
                 {
-                    var sql = "INSERT INTO orders (Id, CartId, Name, Street, ZipCode, City, Phone) " +
-                        "VALUES (@id, @cartId, @name, @street, @zipcode, @city, @phone)";
+                    var sql = "INSERT INTO orders (OrderId, CartId, Name, Street, ZipCode, City, Email) " +
+                        "VALUES (@id, @cartId, @name, @street, @zipcode, @city, @email)";
                     connection.Execute(sql, new
                     {
-                        id = order.Id,
+                        id = order.OrderId,
                         cartId = order.CartId,
                         name = order.Name,
                         street = order.Street,
                         zipcode = order.ZipCode,
                         city = order.City,
-                        phone = order.Phone
+                        email = order.Email
+                    });
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool InsertOrderProduct(string orderId, CartProductModel product)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(this.ConnectionString))
+                {
+                    var sql = "INSERT INTO OrderContent (OrderId, ProductId, Name, Price, Qty) " +
+                        "VALUES (@orderId, @productId, @name, @price, @qty)";
+                    connection.Execute(sql, new
+                    {
+                        orderId,
+                        productId = product.ProductId,
+                        name = product.Name,
+                        price = product.Price,
+                        qty = product.Qty,
                     });
                 }
             }
@@ -54,8 +110,8 @@ namespace SnackShop.Core.Repositories.Implementations
             {
                 using (var connection = new SqlConnection(this.ConnectionString))
                 {
-                    var sql = "UPDATE orders SET IsOpen = 0 WHERE Id = @orderId";
-                    connection.Execute(sql, new { id = orderId });
+                    var sql = "UPDATE orders SET IsOpen = 0 WHERE OrderId = @orderId";
+                    connection.Execute(sql, new { orderId });
                 }
             }
             catch (Exception)
@@ -64,33 +120,6 @@ namespace SnackShop.Core.Repositories.Implementations
             }
 
             return true;
-        }
-
-        public List<OrderModel> GetOrders()
-        {
-            using (var connection = new SqlConnection(this.ConnectionString))
-            {
-                var sql = "SELECT * FROM orders";
-                return connection.Query<OrderModel>(sql).ToList();
-            }
-        }
-
-        public List<OrderModel> GetOpenOrders()
-        {
-            using (var connection = new SqlConnection(this.ConnectionString))
-            {
-                var sql = "SELECT * FROM orders WHERE isOpen = 1";
-                return connection.Query<OrderModel>(sql).ToList();
-            }
-        }
-
-        public List<OrderModel> GetClosedOrders()
-        {
-            using (var connection = new SqlConnection(this.ConnectionString))
-            {
-                var sql = "SELECT * FROM orders WHERE isOpen = 0";
-                return connection.Query<OrderModel>(sql).ToList();
-            }
         }
     }
 }

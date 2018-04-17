@@ -15,24 +15,37 @@ namespace SnackShop.Core.Services
             this.OrderRepository = orderRepository;
         }
 
-        public OrderModel PlaceOrder(OrderModel order)
+        public OrderModel PlaceOrder(OrderModel order, CartModel cart)
         {
-            // Checks if cartId already exists
-            var existingOrderFromCart = this.OrderRepository.GetOrders().Any(x => x.CartId == order.CartId);
-            if ( existingOrderFromCart == true )
+            var orderAlreadyExists = this.OrderRepository.GetAllOrders().Any(x => x.CartId == order.CartId);
+            if ( orderAlreadyExists )
             {
                 return null;
             }
 
-            order.Id = this.GetRandomOrderNumber();
-            order.Date = new DateTime();
+            order.OrderId = this.GetRandomOrderNumber();
 
-            if (this.OrderRepository.PlaceOrder(order))
+            if (this.OrderRepository.InsertOrderInfo(order))
             {
-                return order;
+                foreach (CartProductModel product in cart.Items)
+                {
+                    this.OrderRepository.InsertOrderProduct(order.OrderId, product);
+                }
+
+                return this.OrderRepository.GetOrder(order.OrderId);
             }
 
             return null;
+        }
+
+        public List<OrderModel> GetOrders()
+        {
+            return this.OrderRepository.GetAllOrders();
+        }
+
+        public OrderModel GetOrder(string Id)
+        {
+            return this.OrderRepository.GetOrder(Id);
         }
 
         public bool CloseOrder(string orderId)
@@ -40,20 +53,10 @@ namespace SnackShop.Core.Services
             return this.OrderRepository.CloseOrder(orderId);
         }
 
-        public List<OrderModel> GetOpenOrders()
-        {
-            return this.OrderRepository.GetOpenOrders();
-        }
-
-        public List<OrderModel> GetClosedOrders()
-        {
-            return this.OrderRepository.GetClosedOrders();
-        }
-
         public string GetRandomOrderNumber()
         {
             string numberString;
-            OrderModel existingOrder;
+            OrderModel orderNumberAlreadyExists;
 
             do
             {
@@ -62,10 +65,9 @@ namespace SnackShop.Core.Services
                 {
                     numberString += new Random().Next(0, 9);
                 }
-
-                // Checks if numberString already exists in database before returning
-                existingOrder = this.OrderRepository.GetOrders().SingleOrDefault(x => x.Id == numberString);
-            } while (existingOrder != null);
+                
+               orderNumberAlreadyExists = this.OrderRepository.GetAllOrders().SingleOrDefault(x => x.OrderId == numberString);
+            } while (orderNumberAlreadyExists != null);
 
             return numberString;
         }

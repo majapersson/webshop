@@ -21,6 +21,8 @@ namespace SnackShop.Controllers
         {
             this.CartService = new CartService(
                 new CartRepository(
+                    configuration.GetConnectionString("ConnectionString")),
+                new ProductRepository(
                     configuration.GetConnectionString("ConnectionString")));
             this.OrderService = new OrderService(
                 new OrderRepository(
@@ -37,14 +39,14 @@ namespace SnackShop.Controllers
         [HttpPost]
         public IActionResult Order(OrderModel order)
         {
-            var Order = this.OrderService.PlaceOrder(order);
+            var Cart = this.CartService.GetCart(Request.Cookies["CartID"]);
+            var Order = this.OrderService.PlaceOrder(order, Cart);
 
             if (Order != null)
             {
                 Response.Cookies.Append("CartID", "", new CookieOptions { Expires = DateTime.Now.AddDays(-1) });
-                ViewBag.Order = Order;
-                ViewBag.Cart = this.CartService.GetCart(Order.CartId);
-                return View();
+                this.CartService.EmptyCart(Order.CartId);
+                return View(Order);
             }
             else
             {
