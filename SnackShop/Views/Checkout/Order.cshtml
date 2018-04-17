@@ -1,4 +1,4 @@
-﻿
+﻿@model SnackShop.Core.Models.OrderModel
 @{
     ViewData["Title"] = "Order";
 }
@@ -7,21 +7,20 @@
 
 <div class="card">
 <div class="card-body">
-<h3>Order nr. @ViewBag.Order.Id</h3>
-@foreach (var product in @ViewBag.Cart.Items)
+<h3>Order nr. @Model.OrderId</h3>
+@foreach (var product in @Model.Items)
 {
     <p>@product.Name &emsp; @product.Qty x @product.Price kr</p>
 }
 
-<p><strong>Total: @ViewBag.Cart.GetTotals() kr</strong></p>
+<p><strong>Total: @Model.GetTotals() kr</strong></p>
 
 <div class="address">
-    <p>@ViewBag.Order.Name</p>
-    <p>@ViewBag.Order.Street</p>
-    <p>@ViewBag.Order.ZipCode</p>
-    <p>@ViewBag.Order.City</p>
-    <p>@ViewBag.Order.Email</p>
-    <p>@ViewBag.Order.Phone</p>
+    <p>@Model.Name</p>
+    <p>@Model.Street</p>
+    <p>@Model.ZipCode</p>
+    <p>@Model.City</p>
+    <p>@Model.Email</p>
 </div>
 
 <a href="/" class="btn btn-success">Return to store</a>

@@ -14,36 +14,46 @@ namespace SnackShop.Controllers
     public class CartController : Controller
     {
         private CartService CartService;
-        private CartModel Cart;
 
         public CartController(IConfiguration configuration)
         {
             this.CartService = new CartService(
                 new CartRepository(
+                    configuration.GetConnectionString("ConnectionString")),
+                new ProductRepository(
                     configuration.GetConnectionString("ConnectionString")));
         }
 
         public IActionResult Index()
         {
             var cookie = Request.Cookies["CartID"];
-            this.Cart = this.CartService.GetCart(cookie);
-            return View(Cart);
+            var Cart = this.CartService.GetCart(cookie);
+            if (Cart != null)
+            {
+                return View(Cart);
+            }
+            else
+            {
+                return View(new CartModel("guid", new List<CartProductModel>()));
+            }
         }
 
         [Route("cart/add/{productId?}")]
+        //[HttpPost]
         public IActionResult Add(int productId)
         {
 
             var cartId = this.GetCartCookie();
             var result = this.CartService.AddToCart(productId, cartId);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [Route("cart/remove/{productId?}")]
         public IActionResult Remove(int productId)
         {
-            var result = this.CartService.RemoveFromCart(productId, this.Cart.Id);
+            var cartId = Request.Cookies["CartID"];
+            var result = this.CartService.RemoveFromCart(productId, cartId);
 
             return RedirectToAction("Index");
         }

@@ -28,7 +28,7 @@ else
             @foreach (var product in @Model.Items)
             {
                 <tr>
-                    <td><a href="/cart/remove/@product.Id">Remove</a></td>
+                    <td><a href="/cart/remove/@product.ProductId">Remove</a></td>
                     <td>@product.Name</td>
                     <td>@product.Qty</td>
                     <td>@product.Price kr</td>
