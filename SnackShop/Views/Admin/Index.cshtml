@@ -1,9 +1,11 @@
 ﻿@model List<SnackShop.Core.Models.ProductModel>
 @{
-    ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Admin - Snacks";
 }
-
-<h2>Snacks</h2>
+<div class="admin-menu">
+  <h2 class="current-page">Snacks</h2>
+  <h2 class="admin-menu-item"><a href="/admin/orders/">Orders</a></h2>
+</div>
 
 <div class="card">
 <div class="card-body">
@@ -23,7 +25,10 @@
                 <td>@product.Name</td>
                 <td>@product.Price kr</td>
                 <td><a href="/admin/edit/@product.Slug" class="btn btn-sm btn-outline-success">Edit</a></td>
-                <td><button class="btn btn-sm btn-outline-danger">Delete</button></td>
+                <td><form action="/admin/delete/" method="post">
+                    <input type="hidden" name="productId" value="@product.Id" />
+                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                </form></td>
             </tr>
         }
     </tbody>

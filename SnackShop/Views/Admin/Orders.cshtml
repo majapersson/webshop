@@ -1,0 +1,41 @@
+@model List<SnackShop.Core.Models.OrderModel>
+@{
+    ViewData["Title"] = "Orders";
+}
+<div class="admin-menu">
+  <h2 class="admin-menu-item"><a href="/admin/index/">Snacks</a></h2>
+  <h2 class="current-page">Orders</h2>
+</div>
+
+<div class="card">
+<div class="card-body">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Customer Name</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in @Model)
+        {
+            <tr>
+                <td><a href="/admin/order/@order.OrderId">@order.OrderId</a></td>
+                <td>@order.Name</td>
+                <td>@order.Date</td>
+                <td>
+                  @if (@order.IsOpen) {
+                    <button class="btn btn-success btn-sm" disabled>Open</button>
+                  }
+                  else {
+                    <button class="btn btn-danger btn-sm" disabled>Closed</button>
+                  }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>

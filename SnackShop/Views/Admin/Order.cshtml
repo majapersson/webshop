@@ -1,0 +1,59 @@
+﻿@model SnackShop.Core.Models.OrderModel
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h2 class="main-heading">Order Details</h2>
+
+<div class="card">
+<div class="card-body">
+  <div class="order-heading">
+    <h3>Order nr. @Model.OrderId</h3>
+    <h4>Date placed: @Model.Date</h4>
+  </div>
+
+  <table class="table">
+      <tbody>
+        @foreach (var product in @Model.Items)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Qty á @product.Price</td>
+                <td>@(@product.Price * @product.Qty)</td>
+            </tr>
+        }
+        <tr>
+          <td></td>
+          <td><strong>Total:</strong></td>
+          <td><strong>@Model.GetTotals() kr</strong></td>
+        </tr>
+    </tbody>
+  </table>
+
+<div class="delivery">
+  <strong>Delivery details:</strong>
+    <div class="address">
+      <p><strong>Name:</strong> @Model.Name</p>
+      <p><strong>Street:</strong> @Model.Street</p>
+      <p><strong>Zipcode:</strong> @Model.ZipCode</p>
+      <p><strong>City:</strong> @Model.City</p>
+      <p><strong>Email:</strong> @Model.Email</p>
+    </div>
+
+</div>
+
+<div class="inline-buttons">
+  <a href="/admin/orders/" class="btn btn-success">Return to orders</a>
+
+  @if(@Model.IsOpen)
+  {
+    @using (Html.BeginForm("close", "admin", FormMethod.Post, new { @class = "inline" }))
+    {
+      <input type="hidden" name="id" value="@Model.OrderId">
+      <button type="submit" class="btn btn-danger">Close order</button>
+    }
+  }
+</div>
+
+</div>
+</div>

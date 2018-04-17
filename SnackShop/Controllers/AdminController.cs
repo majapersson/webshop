@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SnackShop.Core.Models;
 using SnackShop.Core.Repositories;
+using SnackShop.Core.Repositories.Implementations;
 using SnackShop.Core.Services;
 
 namespace SnackShop.Controllers
@@ -9,11 +10,15 @@ namespace SnackShop.Controllers
     public class AdminController : Controller
     {
         public ProductService ProductService;
+        public OrderService OrderService;
 
         public AdminController(IConfiguration configuration)
         {
             this.ProductService = new ProductService(
                 new ProductRepository(
+                    configuration.GetConnectionString("ConnectionString")));
+            this.OrderService = new OrderService(
+                new OrderRepository(
                     configuration.GetConnectionString("ConnectionString")));
         }
 
@@ -34,7 +39,7 @@ namespace SnackShop.Controllers
         {
             var result = this.ProductService.Add(model);
 
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -52,6 +57,33 @@ namespace SnackShop.Controllers
             var viewProduct = this.ProductService.Get(product.Slug);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int productId)
+        {
+            var result = this.ProductService.Delete(productId);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Orders()
+        {
+            var orders = this.OrderService.GetOrders();
+            return View(orders);
+        }
+
+        public IActionResult Order(string id)
+        {
+            var order = this.OrderService.GetOrder(id);
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult Close(string id)
+        {
+            this.OrderService.CloseOrder(id);
+            return RedirectToAction("Orders");
         }
     }
 }
