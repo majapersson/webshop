@@ -9,4 +9,3 @@ build/
 node_modules
 x64/
 **/wwwroot/lib
-**/AppData
