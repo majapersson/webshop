@@ -16,12 +16,24 @@ This is a repo for my C# assignment to build a webshop. My webshop will be calle
 - [x] Add customer information on checkout
 - [x] Confirm order to customer
 - [x] Admin tools for adding and editing products
-- [ ] Unit test
+- [x] Admin tools for handling orders
+- [x] Unit test
 
 ## Testers
 Here be testers...
 
 ## Changelog
+
+### 2018-04-17
+- Added admin tools for order handling
+- Styling
+
+### 2018-04-12
+- Fixed snapshot for order
+- Finished unit testing for Cart Repository
+
+### 2018-04-05
+- Unit testing
 
 ### 2018-03-22
 - Basic checkout functionality added

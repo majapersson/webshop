@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackShop", "SnackShop\Snac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackShop.Core", "SnackShop.Core\SnackShop.Core.csproj", "{A2BFF9C7-F050-4E25-AB66-75A739855974}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackShopApi", "SnackShopApi\SnackShopApi.csproj", "{1A336F58-2E20-40CD-9B83-7892DFC4CFE1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnackShop.Core.UnitTests", "SnackShop.Core.UnitTests\SnackShop.Core.UnitTests.csproj", "{55A6A45F-0011-4C37-A4B1-99F5427361E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackShop.Core.UnitTests", "SnackShop.Core.UnitTests\SnackShop.Core.UnitTests.csproj", "{55A6A45F-0011-4C37-A4B1-99F5427361E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{A2BFF9C7-F050-4E25-AB66-75A739855974}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2BFF9C7-F050-4E25-AB66-75A739855974}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2BFF9C7-F050-4E25-AB66-75A739855974}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A336F58-2E20-40CD-9B83-7892DFC4CFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A336F58-2E20-40CD-9B83-7892DFC4CFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A336F58-2E20-40CD-9B83-7892DFC4CFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A336F58-2E20-40CD-9B83-7892DFC4CFE1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55A6A45F-0011-4C37-A4B1-99F5427361E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55A6A45F-0011-4C37-A4B1-99F5427361E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55A6A45F-0011-4C37-A4B1-99F5427361E1}.Release|Any CPU.ActiveCfg = Release|Any CPU

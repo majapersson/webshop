@@ -48,7 +48,7 @@ namespace SnackShop.Controllers
             var product = this.ProductService.Get(id);
             if (product == null)
             {
-                return RedirectToAction("Error", "Home")
+                return RedirectToAction("Error", "Home");
             }
 
             return View(product);
