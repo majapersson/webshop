@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace SnackShop.Core.Repositories.Implementations
 {
-    public class OrderRepository
+    public class OrderRepository : IOrderRepository
     {
         private readonly string ConnectionString;
 
@@ -16,21 +16,16 @@ namespace SnackShop.Core.Repositories.Implementations
             this.ConnectionString = connectionString;
         }
 
-        public string GetConnectionString()
-        {
-            return this.ConnectionString;
-        }
-
-        public List<OrderModel> GetAllOrders()
+        public List<OrderModel> GetAll()
         {
             using (var connection = new SqlConnection(this.ConnectionString))
             {
-                var sql = "SELECT * FROM orders";
+                var sql = "SELECT * FROM orders ORDER BY IsOpen DESC";
                 return connection.Query<OrderModel>(sql).ToList();
             }
         }
 
-        public OrderModel GetOrder(string orderId)
+        public OrderModel Get(string orderId)
         {
             OrderModel order;
             try
@@ -52,7 +47,7 @@ namespace SnackShop.Core.Repositories.Implementations
             return order;
         }
 
-        public bool InsertOrderInfo(OrderModel order)
+        public bool InsertInfo(OrderModel order)
         {
             try
             {
@@ -79,7 +74,7 @@ namespace SnackShop.Core.Repositories.Implementations
             return true;
         }
 
-        public bool InsertOrderProduct(string orderId, CartProductModel product)
+        public bool InsertProduct(string orderId, CartProductModel product)
         {
             try
             {
