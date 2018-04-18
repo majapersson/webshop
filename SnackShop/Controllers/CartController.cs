@@ -32,6 +32,7 @@ namespace SnackShop.Controllers
             {
                 return View(Cart);
             }
+
             else
             {
                 return View(new CartModel("guid", new List<CartProductModel>()));

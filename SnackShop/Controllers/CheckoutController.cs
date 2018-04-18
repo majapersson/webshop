@@ -33,6 +33,10 @@ namespace SnackShop.Controllers
         public IActionResult Index(string cartId)
         {
             var cart = this.CartService.GetCart(cartId);
+            if (cart == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
             return View(cart);
         }
 
@@ -44,14 +48,12 @@ namespace SnackShop.Controllers
 
             if (Order != null)
             {
-                Response.Cookies.Append("CartID", "", new CookieOptions { Expires = DateTime.Now.AddDays(-1) });
-                this.CartService.EmptyCart(Order.CartId);
-                return View(Order);
+                return RedirectToAction("Error", "Home");
             }
-            else
-            {
-                return NotFound();
-            }
+            
+            Response.Cookies.Append("CartID", "", new CookieOptions { Expires = DateTime.Now.AddDays(-1) });
+            this.CartService.EmptyCart(Order.CartId);
+            return View(Order);
         }
     }
 }

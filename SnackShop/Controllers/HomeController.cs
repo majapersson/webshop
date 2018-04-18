@@ -31,12 +31,18 @@ namespace SnackShop.Controllers
         {
             var product = this.ProductService.Get(slug);
 
+            if (product == null)
+            {
+                return RedirectToAction("Error");
+            }
+
             return View(product);
         }
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

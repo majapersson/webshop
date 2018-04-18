@@ -46,6 +46,11 @@ namespace SnackShop.Controllers
         public IActionResult Edit(string id)
         {
             var product = this.ProductService.Get(id);
+            if (product == null)
+            {
+                return RedirectToAction("Error", "Home")
+            }
+
             return View(product);
         }
 
@@ -76,6 +81,11 @@ namespace SnackShop.Controllers
         public IActionResult Order(string id)
         {
             var order = this.OrderService.GetOrder(id);
+            if (order == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             return View(order);
         }
 
