@@ -4,7 +4,7 @@
     ViewData["Title"] = "My Cart";
 }
 
-<h2>Your cart</h2>
+<h2 class="main-heading">Your cart</h2>
 
 <div class="card">
 <div class="card-body">
@@ -30,8 +30,8 @@ else
                 <tr>
                     <td><a href="/cart/remove/@product.ProductId">Remove</a></td>
                     <td>@product.Name</td>
-                    <td>@product.Qty</td>
-                    <td>@product.Price kr</td>
+                    <td>@product.Qty á @product.Price</td>
+                    <td>@(@product.Price * @product.Qty)</td>
                 </tr>
             }
             <tr>
@@ -42,7 +42,7 @@ else
         </tbody>
     </table>
 
-    <div class="button-container">
+    <div class="inline-buttons">
     @using (Html.BeginForm("empty", "cart"))
     {
         <input type="hidden" name="cartId" value="@Model.Id" />

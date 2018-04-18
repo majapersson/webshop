@@ -1,0 +1,41 @@
+.navbar {
+  .nav-link {
+    color: $main-text;
+  }
+}
+
+.navbar-brand {
+  @extend .gradient;
+  font-family: 'Lobster', sans-serif;
+  font-size: 2rem;
+  letter-spacing: .1rem;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    @extend .gradient;
+    filter: brightness(0.7);
+  }
+}
+
+.gradient {
+  background-image: linear-gradient(#f9a8f4, #a43d9e);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.main-heading {
+  // color: $main-text;
+  @extend .gradient;
+  font-family: 'Lobster', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  span {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  @extend .main-heading;
+}

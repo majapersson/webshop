@@ -1,0 +1,42 @@
+:root {
+  font-size: 18px;
+}
+
+body {
+  background-color: var(--light);
+  color: $main-text;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.body-content {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.card {
+  border-radius: 0;
+  box-shadow: 3px 5px 10px lightGrey;
+  color: black;
+  text-align: center;
+
+  &-body {
+    h3 {
+      margin: 2rem auto;
+    }
+  }
+}
+
+.btn {
+  border-radius: 0;
+}
+
+footer {
+  text-align: center;
+}

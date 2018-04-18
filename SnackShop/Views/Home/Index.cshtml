@@ -1,25 +1,32 @@
-﻿@model List<SnackShop.Core.Models.ProductModel>
+@model List<SnackShop.Core.Models.ProductModel>
 
-@{
+  @{
     ViewData["Title"] = "Store Page";
-}
+  }
+  <div class="hero">
+    <h2 class="main-heading">Welcome to <span>Snackshop!</span></h2>
+    <h3 class="main-heading">For all your snacky needs!</h3>
+  </div>
 
-<h2 class="main-heading">Welcome to <span>Snackshop!</span></h2>
-<h3 class="main-heading">For all your snacky needs!</h3>
-
-<div class="card">
-<div class="card-body">
-<div class="product-wrapper">
+  <div class="product-wrapper">
     @foreach (var product in Model)
     {
-        <div class="product">
-            <img src="@product.ImageUrl" />
-            <div class="row">
-              <h4><a href="/product/@product.Slug">@product.Name</a></h4>
-              <a href="cart/add/@product.Id" class="btn btn-success">Add to cart</a>
-            </div>
+      var random = new Random().Next(1, 360);
+      <div class="card product">
+        <div class="card-body" style="background-image: linear-gradient(hsl(@random, 100%, 70%), hsl(@random, 60%, 50%));">
+          <img src="@product.ImageUrl" />
+          <div class="overlay">
+            <h4><a href="/product/@product.Slug">@product.Name</a></h4>
+            <a href="/cart/add/@product.Id" class="btn btn-success">Add to cart</a>
+
+            <!-- @*<form action="/" method="post" name="addToCart">
+              <input type="hidden" name="productId" value="@product.Id" />
+              <button type="submit" class="btn btn-success">Add to cart</button>
+            </form>*@ -->
+          </div>
         </div>
+      </div>
     }
-    </div>
-    </div>
+  </div>
+</div>
 </div>

@@ -1,28 +1,47 @@
-﻿@model SnackShop.Core.Models.OrderModel
+@model SnackShop.Core.Models.OrderModel
 @{
     ViewData["Title"] = "Order";
 }
 
-<h2>Thank you for your order!</h2>
+<h2 class="main-heading">Thank you for your order!</h2>
 
 <div class="card">
 <div class="card-body">
-<h3>Order nr. @Model.OrderId</h3>
-@foreach (var product in @Model.Items)
-{
-    <p>@product.Name &emsp; @product.Qty x @product.Price kr</p>
-}
+  <div class="order-heading">
+    <h3>Order nr. @Model.OrderId</h3>
+    <h4>Date placed: @Model.Date</h4>
+  </div>
 
-<p><strong>Total: @Model.GetTotals() kr</strong></p>
+  <table class="table">
+      <tbody>
+        @foreach (var product in @Model.Items)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Qty á @product.Price</td>
+                <td>@(@product.Price * @product.Qty)</td>
+            </tr>
+        }
+        <tr>
+          <td></td>
+          <td><strong>Total:</strong></td>
+          <td><strong>@Model.GetTotals() kr</strong></td>
+        </tr>
+    </tbody>
+  </table>
 
-<div class="address">
-    <p>@Model.Name</p>
-    <p>@Model.Street</p>
-    <p>@Model.ZipCode</p>
-    <p>@Model.City</p>
-    <p>@Model.Email</p>
+<div class="delivery">
+  <strong>Delivery details:</strong>
+    <div class="address">
+      <p>@Model.Name</p>
+      <p>@Model.Street</p>
+      <p>@Model.ZipCode @Model.City</p>
+    </div>
+
+    <p>A receipt has been sent to <strong>@Model.Email</strong></p>
 </div>
 
-<a href="/" class="btn btn-success">Return to store</a>
+<a href="/admin/orders/" class="btn btn-success">Return to orders</a>
+
 </div>
 </div>

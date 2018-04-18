@@ -1,0 +1,14 @@
+.admin-menu {
+  display: flex;
+  justify-content: space-around;
+
+  a {
+    color: $main-text;
+  }
+}
+
+.product-form {
+  margin: 2rem auto;
+  text-align: left;
+  width: 75%;
+}

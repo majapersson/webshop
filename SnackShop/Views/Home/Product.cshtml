@@ -1,18 +1,21 @@
-﻿@model SnackShop.Core.Models.ProductModel
+@model SnackShop.Core.Models.ProductModel
 
 @{
-    ViewData["Title"] = @Model.Name;
+  ViewData["Title"] = @Model.Name;
 }
 
-<h2>@Model.Name</h2>
+<h2 class="main-heading">@Model.Name</h2>
+<div class="card">
+  <div class="card-body">
+    <div class="single-product">
+      <img src="@Model.ImageUrl" />
+      <div class="info">
+        <p>@Model.Description</p>
 
-<div class="product-wrapper">
-  <img src="@Model.ImageUrl" />
-  <div class="info">
-    <p>@Model.Description</p>
+        <h3>@Model.Price  :-</h3>
 
-    <h3>@Model.Price  :-</h3>
-
-    <a href="/cart/add/@Model.Id" class="btn btn-success">Add to cart</a>
+        <a href="/cart/add/@Model.Id" class="btn btn-success">Add to cart</a>
+      </div>
+    </div>
   </div>
 </div>
