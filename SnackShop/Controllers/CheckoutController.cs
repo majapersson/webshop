@@ -46,7 +46,7 @@ namespace SnackShop.Controllers
             var Cart = this.CartService.GetCart(Request.Cookies["CartID"]);
             var Order = this.OrderService.PlaceOrder(order, Cart);
 
-            if (Order != null)
+            if (Order == null)
             {
                 return RedirectToAction("Error", "Home");
             }
