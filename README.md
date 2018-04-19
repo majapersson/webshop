@@ -20,7 +20,7 @@ This is a repo for my C# assignment to build a webshop. My webshop will be calle
 - [x] Unit test
 
 ## Testers
-Here be testers...
+- Johan Sylvan
 
 ## Changelog
 
