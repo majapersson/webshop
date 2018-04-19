@@ -40,10 +40,8 @@ namespace SnackShop.Controllers
         }
 
         [Route("cart/add/{productId?}")]
-        //[HttpPost]
         public IActionResult Add(int productId)
         {
-
             var cartId = this.GetCartCookie();
             var result = this.CartService.AddToCart(productId, cartId);
 
