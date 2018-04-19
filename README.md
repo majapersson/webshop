@@ -24,6 +24,9 @@ This is a repo for my C# assignment to build a webshop. My webshop will be calle
 
 ## Changelog
 
+### 2018-04-18
+- Unit testing for some OrderService methods
+
 ### 2018-04-17
 - Added admin tools for order handling
 - Styling
